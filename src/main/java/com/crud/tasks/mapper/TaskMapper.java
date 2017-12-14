@@ -10,14 +10,14 @@ import java.util.stream.Collectors;
 @Component
 public class TaskMapper {
 
-    public Task mapToTaskDto(final TaskDto taskDto) {
+    public Task mapToTask(final TaskDto taskDto) {
         return new Task(
                 taskDto.getId(),
                 taskDto.getTitle(),
                 taskDto.getContent());
     }
 
-    public TaskDto mapToTask(final Task task) {
+    public TaskDto mapToTaskDto(final Task task) {
         return new TaskDto(
                 task.getId(),
                 task.getTitle(),
