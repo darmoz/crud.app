@@ -1,3 +1,4 @@
 Manifest-Version: 1.0
-Main-Class: com.crud.tasks.TasksApplication
+Start-Class: com.crud.tasks.TasksApplication
+Main-Class: org.springframework.boot.loader.JarLauncher
 
