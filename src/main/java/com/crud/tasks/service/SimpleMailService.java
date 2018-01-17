@@ -24,7 +24,7 @@ public class SimpleMailService {
         try {
             SimpleMailMessage mailMessage = createMailMessage(mail);
             if(mail.getToCC().equals("NA")) {
-                LOGGER.info("Additional recipient has not been added");
+                LOGGER.warn("Additional recipient has not been added");
                 javaMailSender.send(mailMessage);
             } else {
                 javaMailSender.send(mailMessage);
