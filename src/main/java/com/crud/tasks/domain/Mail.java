@@ -9,10 +9,12 @@ public class Mail {
     private String mailTo;;
     private String subject;
     private String message;
-    private String toCC;
+   private String toCC;
 
-    public Mail(final String mailTo, final String subject, final String message) {
-        this(mailTo, subject, message,"NA");
+    public Mail(String mailTo, String subject, String  message) {
+        this(mailTo, subject , message, "dariusz.mozgowoj@gmail.com" );
     }
+
+
 
 }

@@ -23,7 +23,7 @@ public class SimpleMailService {
 
         try {
             SimpleMailMessage mailMessage = createMailMessage(mail);
-            if(mail.getToCC().equals("NA")) {
+            if(mail.getToCC().equals("dariusz.mozgowoj@gmail.com")) {
                 LOGGER.warn("Additional recipient has not been added");
                 javaMailSender.send(mailMessage);
             } else {
@@ -47,8 +47,6 @@ public class SimpleMailService {
             mailMessage.setSubject(mail.getSubject());
             mailMessage.setText(mail.getMessage());
             mailMessage.setCc(mail.getToCC());
-
-
 
         return mailMessage;
     }
