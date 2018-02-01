@@ -10,7 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CreateTrelloCard {
+public class CreateTrelloCardDto {
 
     @JsonProperty("id")
     private String id;
