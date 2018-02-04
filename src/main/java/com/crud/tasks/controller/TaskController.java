@@ -28,7 +28,7 @@ public class TaskController {
         dbService.deleteTask(dbService.getTaskById(taskId).orElseThrow(TaskNotFoundException::new)); }
 
     @RequestMapping(method = RequestMethod.PUT, value = "updateTask")
-    public  TaskDto updateTask(@RequestBody TaskDto taskDto) {return  taskMapper.mapToTaskDto(
+    public TaskDto updateTask(@RequestBody TaskDto taskDto) {return  taskMapper.mapToTaskDto(
             dbService.saveTask(taskMapper.mapToTask(taskDto)));}
 
     @RequestMapping(method = RequestMethod.POST, value = "createTask", consumes = APPLICATION_JSON_VALUE)

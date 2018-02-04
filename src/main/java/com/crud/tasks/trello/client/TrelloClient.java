@@ -33,8 +33,8 @@ public class TrelloClient {
     public List<TrelloBoardDto> getTrelloBoards() {
 
         try {
-        Optional<TrelloBoardDto[]> boardsResponse = Optional.ofNullable(restTemplate.getForObject(getUri(),
-                TrelloBoardDto[].class));
+            Optional<TrelloBoardDto[]> boardsResponse = Optional.ofNullable(restTemplate.getForObject(getUri(),
+                    TrelloBoardDto[].class));
             return Arrays.asList(boardsResponse.orElse(new TrelloBoardDto[0]));
         } catch(RestClientException e){
             LOGGER.error(e.getMessage(), e);
@@ -59,10 +59,10 @@ public class TrelloClient {
     private URI getUri() {
         return UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint() + "/members/"
                 + trelloConfig.getTrelloUserName() + "/boards")
-                    .queryParam("key", trelloConfig.getTrelloAppKey())
-                    .queryParam("token", trelloConfig.getTrelloToken())
-                    .queryParam("fields", "name,id")
-                    .queryParam("lists", "all").build().encode().toUri();
+                .queryParam("key", trelloConfig.getTrelloAppKey())
+                .queryParam("token", trelloConfig.getTrelloToken())
+                .queryParam("fields", "name,id")
+                .queryParam("lists", "all").build().encode().toUri();
     }
 
 }
