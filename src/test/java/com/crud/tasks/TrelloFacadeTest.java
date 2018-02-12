@@ -1,24 +1,30 @@
 package com.crud.tasks;
 
-import com.crud.tasks.domain.TrelloBoard;
-import com.crud.tasks.domain.TrelloBoardDto;
-import com.crud.tasks.domain.TrelloList;
-import com.crud.tasks.domain.TrelloListDto;
+import com.crud.tasks.domain.*;
 import com.crud.tasks.mapper.TrelloMapper;
 import com.crud.tasks.service.TrelloService;
+import com.crud.tasks.trello.config.TrelloConfig;
 import com.crud.tasks.trello.facade.TrelloFacade;
 import com.crud.tasks.trello.validator.TrelloValidator;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.util.UriComponentsBuilder;
+
 import static org.junit.Assert.*;
 
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -31,6 +37,7 @@ public class TrelloFacadeTest {
     private TrelloService trelloService;
     @Mock
     private TrelloMapper trelloMapper;
+
 
     @Test
     public void shouldFetchEmptyList() {
@@ -98,6 +105,27 @@ public class TrelloFacadeTest {
             assertEquals(false,trelloListDto.isClosed());
         });
         });
+
+    }
+
+    @Test
+    public void testCreateNewCard() throws MalformedURLException {
+        //given
+        TrelloCardDto trelloCardDto = new TrelloCardDto("test", "test1", "top", "1");
+        TrelloCard trelloCard = new TrelloCard("test", "test1", "top", "1");
+        CreateTrelloCardDto createTrelloCardDto = new CreateTrelloCardDto("1", "test", "any");
+
+        when(trelloMapper.mapToCard(trelloCardDto)).thenReturn(trelloCard);
+        doNothing().when(trelloValidator).validateCard(trelloCard);
+        when(trelloMapper.mapToCardDto(trelloCard)).thenReturn(trelloCardDto);
+        when(trelloService.createTrelloCard(trelloCardDto)).thenReturn(createTrelloCardDto);
+        //when
+        CreateTrelloCardDto card = trelloFacade.createCard(trelloCardDto);
+
+        //then
+        assertEquals("test",card.getName());
+        assertEquals("1", card.getId());
+        assertEquals("any", card.getShortUrl());
 
     }
 }

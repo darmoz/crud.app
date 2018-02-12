@@ -57,10 +57,10 @@ public class TrelloClient {
     }
 
     private URI getUri() {
-        return UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint() + "/members/"
-                + trelloConfig.getTrelloUserName() + "/boards")
-                .queryParam("key", trelloConfig.getTrelloAppKey())
-                .queryParam("token", trelloConfig.getTrelloToken())
+        return UriComponentsBuilder.fromHttpUrl("https://api.trello.com/1" + "/members/"
+                + "dariuszmozgowoj" + "/boards")
+                .queryParam("key", "0e00764b541fab870789683dd9f23061")
+                .queryParam("token", "4eb746acef2bb20ba9651280d1fb33ca46aba80101302f757beb7f5497e54f8b")
                 .queryParam("fields", "name,id")
                 .queryParam("lists", "all").build().encode().toUri();
     }
