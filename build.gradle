@@ -45,4 +45,5 @@ dependencies {
 	compile('io.springfox:springfox-swagger-ui:2.7.0')
 	compile('org.springframework.boot:spring-boot-starter-mail:1.5.9.RELEASE')
 	compile('com.google.code.gson:gson:2.8.2')
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 }
