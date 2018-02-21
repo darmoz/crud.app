@@ -5,9 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.mail.internet.MimeMessage;
 
 @Service
 public class SimpleMailService {
@@ -17,6 +21,9 @@ public class SimpleMailService {
     @Autowired
     private JavaMailSender javaMailSender;
 
+    @Autowired
+    private MailCreatorService mailCreatorService;
+
     public void send(final Mail mail) {
 
         LOGGER.info("Preparing mail context....");
@@ -25,9 +32,9 @@ public class SimpleMailService {
             SimpleMailMessage mailMessage = createMailMessage(mail);
             if(mail.getToCC().equals("dariusz.mozgowoj@gmail.com")) {
                 LOGGER.warn("Additional recipient has not been added");
-                javaMailSender.send(mailMessage);
+                javaMailSender.send(createMimeMessage(mail));
             } else {
-                javaMailSender.send(mailMessage);
+                javaMailSender.send(createMimeMessage(mail));
             }
 
             LOGGER.info("Mail has been sent");
@@ -49,6 +56,15 @@ public class SimpleMailService {
             mailMessage.setCc(mail.getToCC());
 
         return mailMessage;
+    }
+
+    private MimeMessagePreparator createMimeMessage(final Mail mail) {
+        return mimeMessage -> {
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
+            mimeMessageHelper.setTo(mail.getMailTo());
+            mimeMessageHelper.setSubject(mail.getSubject());
+            mimeMessageHelper.setText(mailCreatorService.bulidTrelloCardEmail(mail.getMessage()), true);
+        };
     }
 
 }
