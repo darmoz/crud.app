@@ -22,18 +22,7 @@ public class TrelloController {
     public List<TrelloBoardDto> getTrelloBoards() {
         return trelloFacade.fetchTrelloBoards();
     }
- /*   public void getTrelloBoards() {
-        List<TrelloBoardDto> trelloBoards = trelloClient.getTrelloBoards();
-        trelloBoards.stream()
-                .filter(f ->f.getId() != null && f.getName() != null)
-                .filter(f -> f.getName().contains("Kodilla"))
-                .forEach(trelloBoardDto -> {
-                    System.out.println(trelloBoardDto.getId() + " " + trelloBoardDto.getName());
-                    System.out.println("This board contains lists: ");
-                    trelloBoardDto.getLists().forEach(trelloList -> System.out.println(trelloList.getName() + " - "
-                            + trelloList.getId() + " - " + trelloList.isClosed()));
-                });
-    }*/
+
 
     @RequestMapping(method = RequestMethod.POST, value = "/cards")
     public CreateTrelloCardDto createTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
