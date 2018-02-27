@@ -35,38 +35,6 @@ public class TrelloValidatorTestSuite {
     @InjectMocks
     private TrelloValidator trelloValidator;
 
-    @Mock
-    private Appender mockAppender;
-
-    @Captor
-    private ArgumentCaptor<LoggingEvent> captorLoggingEvent;
-
-    @Before
-    public void setup() {
-        final Logger logger = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
-        logger.addAppender(mockAppender);
-    }
-
-    @After
-    public void teardown() {
-        final Logger logger = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
-        logger.detachAppender(mockAppender);
-    }
-
-    @Test
-    public void testValidateCard() {
-        //Given
-        TrelloCard trelloCard = new TrelloCard("my_card", "card", "2", "1");
-        //When
-        trelloValidator.validateCard(trelloCard);
-        //then
-        verify(mockAppender).doAppend(captorLoggingEvent.capture());
-        final LoggingEvent loggingEvent = captorLoggingEvent.getValue();
-        assertThat(loggingEvent.getLevel(), is(Level.INFO));
-        assertThat(loggingEvent.getFormattedMessage(),
-                is("Application is working properly."));
-    }
-
     @Test
     public void testValidateBoard() {
         //given

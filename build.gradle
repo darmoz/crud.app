@@ -16,7 +16,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
-//apply plugin: 'war'
+///apply plugin: 'war'
 
 group = 'com.crud'
 version = '0.0.1-SNAPSHOT'
@@ -39,7 +39,7 @@ dependencies {
 	testCompile('junit:junit')
 	compile('org.projectlombok:lombok')
 	compile('com.h2database:h2')
-	//providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+//	/providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
 	compile('org.springframework.boot:spring-boot-starter-actuator')
 	compile('io.springfox:springfox-swagger2:2.7.0')
 	compile('io.springfox:springfox-swagger-ui:2.7.0')

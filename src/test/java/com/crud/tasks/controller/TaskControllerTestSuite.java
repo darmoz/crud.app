@@ -54,7 +54,7 @@ public class TaskControllerTestSuite {
         //when & then
         when(dbService.getTaskById(task.getId())).thenReturn(Optional.ofNullable(task));
         when(taskMapper.mapToTaskDto(task)).thenReturn(taskDto);
-        mockMvc.perform(get("/v1/task/getTask?taskId={taskId}", 1L)
+        mockMvc.perform(get("/v1/tasks/{taskId}", 1L)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id",is(1)))
@@ -80,7 +80,7 @@ public class TaskControllerTestSuite {
         when(dbService.getAllTasks()).thenReturn(list);
         when(taskMapper.mapToTaskDtoList(list)).thenReturn(listDto);
         //when & then
-        mockMvc.perform(get("/v1/task/getTasks").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/v1/tasks").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[1].id", is(2)))
@@ -99,7 +99,7 @@ public class TaskControllerTestSuite {
        Gson gson = new Gson();
        String jsonContent = gson.toJson(task);
         // when & then
-        mockMvc.perform(post("/v1/task/createTask").contentType(MediaType.APPLICATION_JSON)
+        mockMvc.perform(post("/v1/tasks").contentType(MediaType.APPLICATION_JSON)
                 .content(jsonContent)
                 .characterEncoding("UTF-8"))
                 .andExpect(status().isOk());
@@ -117,7 +117,7 @@ public class TaskControllerTestSuite {
         Gson gson = new Gson();
         String jsonContent = gson.toJson(task);
         // when & then
-        mockMvc.perform(put("/v1/task/updateTask").contentType(MediaType.APPLICATION_JSON)
+        mockMvc.perform(put("/v1/tasks").contentType(MediaType.APPLICATION_JSON)
                 .content(jsonContent)
                 .characterEncoding("UTF-8"))
                 .andExpect(status().isOk())
@@ -135,7 +135,7 @@ public class TaskControllerTestSuite {
         when(dbService.getTaskById(task.getId())).thenReturn(Optional.ofNullable(task));
         doNothing().when(dbService).deleteTask(task);
         //when & then
-        mockMvc.perform(delete("/v1/task/deleteTask?taskId={taskId}", 1L)
+        mockMvc.perform(delete("/v1/tasks/{taskId}", 1L)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
