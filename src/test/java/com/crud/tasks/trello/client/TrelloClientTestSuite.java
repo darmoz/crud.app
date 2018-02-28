@@ -72,27 +72,28 @@ public class TrelloClientTestSuite {
 
     @Test
     public void createNewCard() throws Exception {
-            //given
-            TrelloCardDto trelloCardDto = new TrelloCardDto("test", "test", "top", "1");
-            CreateTrelloCardDto createTrelloCardDto = new CreateTrelloCardDto("1", "test", "any");
-            URI url = UriComponentsBuilder.fromHttpUrl( "https://api.trello.com/1" + "/cards")
-                    .queryParam("key", "0e00764b541fab870789683dd9f23061")
-                    .queryParam("token", "4eb746acef2bb20ba9651280d1fb33ca46aba80101302f757beb7f5497e54f8b")
-                    .queryParam("name", trelloCardDto.getName())
-                    .queryParam("desc", trelloCardDto.getDescription())
-                    .queryParam("pos", trelloCardDto.getPos())
-                    .queryParam("idList", trelloCardDto.getListId()).build().encode().toUri();
+        //given
+        TrelloCardDto trelloCardDto = new TrelloCardDto("test", "test", "top", "1");
+        CreateTrelloCardDto createTrelloCardDto = new CreateTrelloCardDto("1", "test", "any");
+        URI url = UriComponentsBuilder.fromHttpUrl("https://api.trello.com/1" + "/cards")
+                .queryParam("key", "0e00764b541fab870789683dd9f23061")
+                .queryParam("token", "4eb746acef2bb20ba9651280d1fb33ca46aba80101302f757beb7f5497e54f8b")
+                .queryParam("name", trelloCardDto.getName())
+                .queryParam("desc", trelloCardDto.getDescription())
+                .queryParam("pos", trelloCardDto.getPos())
+                .queryParam("idList", trelloCardDto.getListId()).build().encode().toUri();
 
-            when(trelloConfig.getTrelloApiEndpoint()).thenReturn("https://api.trello.com/1");
-            when(trelloConfig.getTrelloAppKey()).thenReturn("0e00764b541fab870789683dd9f23061");
-            when(trelloConfig.getTrelloToken()).thenReturn("4eb746acef2bb20ba9651280d1fb33ca46aba80101302f757beb7f5497e54f8b");
-            when(restTemplate.postForObject(url, null,CreateTrelloCardDto.class)).thenReturn(createTrelloCardDto);
-            //when
-            CreateTrelloCardDto card = trelloClient.createNewCard(trelloCardDto);
-            //then
-            assertEquals(createTrelloCardDto.getId(), card.getId());
-            assertEquals(createTrelloCardDto.getName(), card.getName());
-            assertEquals(createTrelloCardDto.getShortUrl(), card.getShortUrl());
-            String http = trelloConfig.getTrelloApiEndpoint()
+        when(trelloConfig.getTrelloApiEndpoint()).thenReturn("https://api.trello.com/1");
+        when(trelloConfig.getTrelloAppKey()).thenReturn("0e00764b541fab870789683dd9f23061");
+        when(trelloConfig.getTrelloToken()).thenReturn("4eb746acef2bb20ba9651280d1fb33ca46aba80101302f757beb7f5497e54f8b");
+        when(restTemplate.postForObject(url, null, CreateTrelloCardDto.class)).thenReturn(createTrelloCardDto);
+        //when
+        CreateTrelloCardDto card = trelloClient.createNewCard(trelloCardDto);
+        //then
+        assertEquals(createTrelloCardDto.getId(), card.getId());
+        assertEquals(createTrelloCardDto.getName(), card.getName());
+        assertEquals(createTrelloCardDto.getShortUrl(), card.getShortUrl());
+        String http = trelloConfig.getTrelloApiEndpoint();
+    }
 
 }
