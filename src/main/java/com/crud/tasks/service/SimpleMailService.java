@@ -29,12 +29,12 @@ public class SimpleMailService {
         LOGGER.info("Preparing mail context....");
 
         try {
-            //SimpleMailMessage mailMessage = createMailMessage(mail);
+            SimpleMailMessage mailMessage = createMailMessage(mail);
             if(mail.getToCC().equals("dariusz.mozgowoj@gmail.com")) {
                 LOGGER.warn("Additional recipient has not been added");
-                javaMailSender.send(createMimeMessage(mail));
+                javaMailSender.send(mailMessage);
             } else {
-                javaMailSender.send(createMimeMessage(mail));
+                javaMailSender.send(mailMessage);
             }
 
             LOGGER.info("Mail has been sent");

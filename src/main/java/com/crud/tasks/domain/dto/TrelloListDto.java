@@ -1,21 +1,23 @@
-package com.crud.tasks.domain;
+package com.crud.tasks.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CreateTrelloCardDto {
-    
+public class TrelloListDto {
+
     @JsonProperty("id")
     private String id;
 
     @JsonProperty("name")
     private String name;
 
-    @JsonProperty("shortUrl")
-    private String shortUrl;
+    @JsonProperty("closed")
+    private boolean isClosed;
 }

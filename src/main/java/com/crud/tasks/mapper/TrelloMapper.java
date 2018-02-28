@@ -1,6 +1,9 @@
 package com.crud.tasks.mapper;
 
 import com.crud.tasks.domain.*;
+import com.crud.tasks.domain.dto.TrelloBoardDto;
+import com.crud.tasks.domain.dto.TrelloCardDto;
+import com.crud.tasks.domain.dto.TrelloListDto;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

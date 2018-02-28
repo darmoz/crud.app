@@ -1,6 +1,9 @@
 package com.crud.tasks.controller;
 
-import com.crud.tasks.domain.*;
+import com.crud.tasks.domain.dto.CreateTrelloCardDto;
+import com.crud.tasks.domain.dto.TrelloBoardDto;
+import com.crud.tasks.domain.dto.TrelloCardDto;
+import com.crud.tasks.domain.dto.TrelloListDto;
 import com.crud.tasks.trello.facade.TrelloFacade;
 import com.google.gson.Gson;
 import org.junit.Test;

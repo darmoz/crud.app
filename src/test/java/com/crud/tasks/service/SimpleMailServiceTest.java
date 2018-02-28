@@ -31,11 +31,16 @@ public class SimpleMailServiceTest {
     public void shouldSendMail() {
         //Given
         Mail email = new Mail("test@test.com", "test", "test sending email" );
-        MimeMessagePreparator message = simpleMailService.createMimeMessage(email);
+
+        SimpleMailMessage message = new SimpleMailMessage();
+                message.setTo(email.getMailTo());
+                message.setSubject(email.getSubject());
+                message.setText(email.getMessage());
+                message.setCc(email.getToCC());
         //When
         simpleMailService.send(email);
+
         //Then
-        System.out.println(message);
-        //verify(javaMailSender, times(1)).send(message);
+        verify(javaMailSender, times(1)).send(message);
     }
 }

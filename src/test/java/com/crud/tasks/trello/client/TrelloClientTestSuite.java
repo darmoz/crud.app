@@ -1,14 +1,14 @@
 package com.crud.tasks.trello.client;
 
-import com.crud.tasks.config.AdminConfig;
-import com.crud.tasks.domain.*;
+import com.crud.tasks.domain.dto.CreateTrelloCardDto;
+import com.crud.tasks.domain.dto.TrelloBoardDto;
+import com.crud.tasks.domain.dto.TrelloCardDto;
 import com.crud.tasks.trello.config.TrelloConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -27,7 +27,6 @@ public class TrelloClientTestSuite {
     private RestTemplate restTemplate;
     @Mock
     private TrelloConfig trelloConfig;
-
 
     @Test
     public void getTrelloBoards() throws Exception {
@@ -69,9 +68,7 @@ public class TrelloClientTestSuite {
         //then
         assertTrue(theList.isEmpty());
         assertEquals(emptyList.size(), theList.size());
-
     }
-
 
     @Test
     public void createNewCard() throws Exception {
@@ -96,8 +93,6 @@ public class TrelloClientTestSuite {
             assertEquals(createTrelloCardDto.getId(), card.getId());
             assertEquals(createTrelloCardDto.getName(), card.getName());
             assertEquals(createTrelloCardDto.getShortUrl(), card.getShortUrl());
-            String http = trelloConfig.getTrelloApiEndpoint();
-
-    }
+            String http = trelloConfig.getTrelloApiEndpoint()
 
 }
